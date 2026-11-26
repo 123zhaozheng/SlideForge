@@ -33,14 +33,14 @@
 
 <a id="comparisons"></a>
 
-## Comparisons & Showcase
+## Showcase: 100% Native Editable Objects (`Ctrl+A` in PowerPoint)
 
-All showcase decks below use synthetic demo data and are rendered directly from the generated `.pptx` files via PowerPoint COM. Every text element, vector container, gradient shape, and transparent AI component remains individually editable inside PowerPoint and WPS.
+All showcase decks below use synthetic demo data. Every text run, vector container, gradient block, connector, and transparent AI visual component is an independent, editable PowerPoint object — not a flat raster picture.
 
-### Flat AI blueprint vs. SlideForge native editable PPTX
+### Real PowerPoint `Ctrl+A` selection proof (Strategy House)
 
 <p align="center">
-  <img src="docs/assets/compare-blueprint-vs-pptx.jpg" alt="Comparison: flat AI blueprint vs SlideForge native editable PPTX" width="1200" />
+  <img src="docs/assets/example-1-ctrl-a-editable.jpg" alt="PowerPoint Ctrl+A showing every shape and textbox individually editable" width="1200" />
 </p>
 
 ### Extracted RGBA transparent component sheet (automatic alpha QA)
@@ -49,7 +49,7 @@ All showcase decks below use synthetic demo data and are rendered directly from 
   <img src="docs/assets/components-alpha-sheet.jpg" alt="SlideForge extracted RGBA transparent 3D components on checkerboard" width="1200" />
 </p>
 
-### Four rendered native editable PPTX examples
+### Rendered native editable PPTX examples
 
 <p align="center">
   <img src="docs/assets/example-1-strategy-house.jpg" alt="Example 1: Strategy House editable PPTX" width="1200" />

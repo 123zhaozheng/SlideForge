@@ -33,14 +33,14 @@
 
 <a id="zh-comparisons"></a>
 
-## 效果对比与示例
+## 实拍效果：PowerPoint `Ctrl+A` 全选可编辑证明
 
-以下 4 套演示均使用脱敏模拟数据，展示图全部由生成的 `.pptx` 文件经本机 PowerPoint 真实渲染导出；页面中的文字、渐变色块、边框、连接线与透明立体组件均可在 PowerPoint / WPS 中独立选中和编辑。
+以下 4 套演示均使用脱敏模拟数据。每一处标题、正文、渐变色块、边框、连接线与透明立体组件均为独立的原生 PowerPoint 图元，而非整张死图片。
 
-### 扁平 AI 蓝图 vs. SlideForge 原生可编辑 PPTX
+### PowerPoint 中按下 `Ctrl+A` 的真实选中框效果（战略屋）
 
 <p align="center">
-  <img src="docs/assets/compare-blueprint-vs-pptx.jpg" alt="效果对比：扁平 AI 蓝图 vs SlideForge 原生可编辑 PPTX" width="1200" />
+  <img src="docs/assets/example-1-ctrl-a-editable.jpg" alt="PowerPoint Ctrl+A 全选展示每一个原生可编辑图元与文本框" width="1200" />
 </p>
 
 ### 纯白底组件图集自动抠透明验收（棋盘格预览）
@@ -49,7 +49,7 @@
   <img src="docs/assets/components-alpha-sheet.jpg" alt="SlideForge 自动提取的 RGBA 透明立体组件棋盘格预览" width="1200" />
 </p>
 
-### 4 套原生可编辑 PPTX 实渲示例
+### 4 套原生可编辑 PPTX 实渲成品
 
 <p align="center">
   <img src="docs/assets/example-1-strategy-house.jpg" alt="示例 1：战略屋三柱架构可编辑 PPTX" width="1200" />
