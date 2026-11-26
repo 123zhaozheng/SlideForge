@@ -4,6 +4,10 @@
   <a href="README.zh-CN.md">简体中文</a>
 </p>
 
+<p align="center">
+  <img src="docs/assets/cover.jpg" alt="SlideForge product cover: 4-layer native editable PPTX engine" width="1200" />
+</p>
+
 <h1 align="center">SlideForge</h1>
 
 <p align="center">

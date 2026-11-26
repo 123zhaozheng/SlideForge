@@ -4,6 +4,10 @@
   <a href="README.md">English</a>
 </p>
 
+<p align="center">
+  <img src="docs/assets/cover.jpg" alt="SlideForge 产品封面：四层解耦全自动原生可编辑 PPTX 生产引擎" width="1200" />
+</p>
+
 <h1 align="center">SlideForge</h1>
 
 <p align="center">
