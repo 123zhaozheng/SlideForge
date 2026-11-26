@@ -1,0 +1,85 @@
+{
+  "style_ref": "style_ref.png",
+  "chain_batch1": false,
+  "palette_lock": "Deep Ocean Navy #0F2A56 (gradient #1E3A8A to #0F2A56), Tech Cyan #0284C7, Emerald Teal #0D9488, Soft Ice #F0F9FF, modern executive consulting flat-vector aesthetic",
+  "style_brief": "Consistent stroke weight, refined rounded corners, ultra-clean flat-vector geometry with subtle modern lighting, zero text",
+  "batches": [
+    {
+      "id": "batch_01",
+      "rows": 2,
+      "cols": 3,
+      "style_note": "Hero card backing, directional transition graphics, and core pillar emblems",
+      "items": [
+        {
+          "name": "hero_navy_card",
+          "cut_mode": "solid",
+          "prompt": "Blank Hero Anchor Card Background: sleek rounded rectangle (4:3) filled with deep ocean navy linear gradient (#1E3A8A to #0F2A56) and subtle diagonal specular glass sheen, zero text"
+        },
+        {
+          "name": "leap_arrow",
+          "cut_mode": "soft_fade",
+          "tint": "white",
+          "prompt": "Upward-right ascending leap arrow emblem in tech cyan (#0284C7) fading softly at its tail, clean geometric vector graphic"
+        },
+        {
+          "name": "double_chevron",
+          "cut_mode": "soft_fade",
+          "prompt": "Bold navy-to-cyan gradient double right-pointing chevron arrow (») for roadmap transition, standalone vector graphic"
+        },
+        {
+          "name": "pillar_arch_badge",
+          "cut_mode": "solid",
+          "prompt": "Solid deep navy (#0F2A56) rounded-square emblem containing a crisp pure-white minimalist modular architecture blocks icon"
+        },
+        {
+          "name": "pillar_ai_badge",
+          "cut_mode": "solid",
+          "prompt": "Solid tech cyan (#0284C7) rounded-square emblem containing a crisp pure-white minimalist chat bubble with sparkle icon"
+        },
+        {
+          "name": "pillar_loop_badge",
+          "cut_mode": "solid",
+          "prompt": "Solid emerald teal (#0D9488) rounded-square emblem containing a crisp pure-white circular 3-arrow closed-loop cycle icon"
+        }
+      ]
+    },
+    {
+      "id": "batch_02",
+      "rows": 2,
+      "cols": 3,
+      "style_note": "Matching circular line icons for workflow steps and governance modules (2nd batch)",
+      "items": [
+        {
+          "name": "icon_sync",
+          "cut_mode": "solid",
+          "prompt": "Soft ice-blue (#F0F9FF) circular badge with thin navy border containing a navy flat-vector document + circular sync icon"
+        },
+        {
+          "name": "icon_agent",
+          "cut_mode": "solid",
+          "prompt": "Soft cyan-tint circular badge with thin cyan border containing a cyan flat-vector user + AI sparkle icon"
+        },
+        {
+          "name": "icon_shield",
+          "cut_mode": "solid",
+          "prompt": "Soft ice-blue circular badge with thin navy border containing a navy flat-vector security shield with checkmark icon"
+        },
+        {
+          "name": "icon_database",
+          "cut_mode": "solid",
+          "prompt": "Soft cyan-tint circular badge with thin cyan border containing a cyan flat-vector stacked database cylinder icon"
+        },
+        {
+          "name": "icon_link",
+          "cut_mode": "solid",
+          "prompt": "Soft mint-tint circular badge with thin teal border containing a teal flat-vector chain-link document path icon"
+        },
+        {
+          "name": "icon_publish",
+          "cut_mode": "solid",
+          "prompt": "Soft mint-tint circular badge with thin teal border containing a teal flat-vector minimalist paper-plane publish icon"
+        }
+      ]
+    }
+  ]
+}
