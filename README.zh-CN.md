@@ -33,16 +33,39 @@
 
 <a id="zh-comparisons"></a>
 
-## 效果对比
+## 效果对比与示例
 
-<!-- 将对比图放入 docs/assets/ 后取消下方注释即可直接展示 -->
-<!--
+以下 4 套演示均使用脱敏模拟数据，展示图全部由生成的 `.pptx` 文件经本机 PowerPoint 真实渲染导出；页面中的文字、渐变色块、边框、连接线与透明立体组件均可在 PowerPoint / WPS 中独立选中和编辑。
+
+### 扁平 AI 蓝图 vs. SlideForge 原生可编辑 PPTX
+
 <p align="center">
-  <img src="docs/assets/compare-1.png" alt="效果对比 1：扁平 AI 图与原生可编辑 PPTX 对比" width="1200" />
+  <img src="docs/assets/compare-blueprint-vs-pptx.jpg" alt="效果对比：扁平 AI 蓝图 vs SlideForge 原生可编辑 PPTX" width="1200" />
 </p>
--->
 
-> 对比示例图（扁平参考图 / 文档输入 vs. PowerPoint 实渲与可编辑图层对比）将持续更新在 [`docs/assets/`](docs/assets/)。
+### 纯白底组件图集自动抠透明验收（棋盘格预览）
+
+<p align="center">
+  <img src="docs/assets/components-alpha-sheet.jpg" alt="SlideForge 自动提取的 RGBA 透明立体组件棋盘格预览" width="1200" />
+</p>
+
+### 4 套原生可编辑 PPTX 实渲示例
+
+<p align="center">
+  <img src="docs/assets/example-1-strategy-house.jpg" alt="示例 1：战略屋三柱架构可编辑 PPTX" width="1200" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/example-2-okr-ecosystem.jpg" alt="示例 2：OKR 生态协同体系可编辑 PPTX" width="1200" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/example-3-ai-overview.jpg" alt="示例 3：企业 AI 能力全景概览可编辑 PPTX" width="1200" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/example-4-ai-scenarios.jpg" alt="示例 4：六大 AI 标杆场景落地成效可编辑 PPTX" width="1200" />
+</p>
 
 <a id="zh-features"></a>
 
