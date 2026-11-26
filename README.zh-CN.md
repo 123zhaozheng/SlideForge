@@ -35,36 +35,19 @@
 
 ## 实拍效果：PowerPoint `Ctrl+A` 全选可编辑证明
 
-以下 4 套演示均使用脱敏模拟数据。每一处标题、正文、渐变色块、边框、连接线与透明立体组件均为独立的原生 PowerPoint 图元，而非整张死图片。
+以下 4 套示例全部采用脱敏模拟数据。左侧为生成的 `.pptx` 真实渲染效果，右侧为同一份 `.pptx` 在 PowerPoint 中直接按下 **`Ctrl+A` 全选** 的真实截图——每一处文字、渐变色块、边框、连接线与透明立体组件均为独立的原生可编辑对象，绝非死图片。
 
-### PowerPoint 中按下 `Ctrl+A` 的真实选中框效果（战略屋）
-
-<p align="center">
-  <img src="docs/assets/example-1-ctrl-a-editable.jpg" alt="PowerPoint Ctrl+A 全选展示每一个原生可编辑图元与文本框" width="1200" />
-</p>
+| 生成结果（PowerPoint 实渲） | PowerPoint 中按 `Ctrl+A` 全选（全原生可编辑） |
+| :---: | :---: |
+| <img src="docs/assets/example-1-strategy-house.jpg" alt="示例 1 实渲" width="580" /> | <img src="docs/assets/example-1-ctrl-a-editable.jpg" alt="示例 1 Ctrl+A 全选可编辑" width="580" /> |
+| <img src="docs/assets/example-2-okr-ecosystem.jpg" alt="示例 2 实渲" width="580" /> | <img src="docs/assets/example-2-ctrl-a-editable.jpg" alt="示例 2 Ctrl+A 全选可编辑" width="580" /> |
+| <img src="docs/assets/example-3-ai-overview.jpg" alt="示例 3 实渲" width="580" /> | <img src="docs/assets/example-3-ctrl-a-editable.jpg" alt="示例 3 Ctrl+A 全选可编辑" width="580" /> |
+| <img src="docs/assets/example-4-ai-scenarios.jpg" alt="示例 4 实渲" width="580" /> | <img src="docs/assets/example-4-ctrl-a-editable.jpg" alt="示例 4 Ctrl+A 全选可编辑" width="580" /> |
 
 ### 纯白底组件图集自动抠透明验收（棋盘格预览）
 
 <p align="center">
-  <img src="docs/assets/components-alpha-sheet.jpg" alt="SlideForge 自动提取的 RGBA 透明立体组件棋盘格预览" width="1200" />
-</p>
-
-### 4 套原生可编辑 PPTX 实渲成品
-
-<p align="center">
-  <img src="docs/assets/example-1-strategy-house.jpg" alt="示例 1：战略屋三柱架构可编辑 PPTX" width="1200" />
-</p>
-
-<p align="center">
-  <img src="docs/assets/example-2-okr-ecosystem.jpg" alt="示例 2：OKR 生态协同体系可编辑 PPTX" width="1200" />
-</p>
-
-<p align="center">
-  <img src="docs/assets/example-3-ai-overview.jpg" alt="示例 3：企业 AI 能力全景概览可编辑 PPTX" width="1200" />
-</p>
-
-<p align="center">
-  <img src="docs/assets/example-4-ai-scenarios.jpg" alt="示例 4：六大 AI 标杆场景落地成效可编辑 PPTX" width="1200" />
+  <img src="docs/assets/components-alpha-sheet.jpg" alt="SlideForge 自动提取的 RGBA 透明立体组件棋盘格预览" width="1160" />
 </p>
 
 <a id="zh-features"></a>

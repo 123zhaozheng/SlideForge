@@ -35,36 +35,19 @@
 
 ## Showcase: 100% Native Editable Objects (`Ctrl+A` in PowerPoint)
 
-All showcase decks below use synthetic demo data. Every text run, vector container, gradient block, connector, and transparent AI visual component is an independent, editable PowerPoint object — not a flat raster picture.
+All four showcase slides below use synthetic demo data. On the left is the rendered `.pptx` output; on the right is the exact same `.pptx` opened in Microsoft PowerPoint with **`Ctrl+A`** pressed — every text box, gradient card, border, connector, and transparent AI visual asset is an independent native object.
 
-### Real PowerPoint `Ctrl+A` selection proof (Strategy House)
-
-<p align="center">
-  <img src="docs/assets/example-1-ctrl-a-editable.jpg" alt="PowerPoint Ctrl+A showing every shape and textbox individually editable" width="1200" />
-</p>
+| Rendered Output (PowerPoint) | Native Editable Objects (`Ctrl+A` in PowerPoint) |
+| :---: | :---: |
+| <img src="docs/assets/example-1-strategy-house.jpg" alt="Example 1 rendered" width="580" /> | <img src="docs/assets/example-1-ctrl-a-editable.jpg" alt="Example 1 Ctrl+A editable" width="580" /> |
+| <img src="docs/assets/example-2-okr-ecosystem.jpg" alt="Example 2 rendered" width="580" /> | <img src="docs/assets/example-2-ctrl-a-editable.jpg" alt="Example 2 Ctrl+A editable" width="580" /> |
+| <img src="docs/assets/example-3-ai-overview.jpg" alt="Example 3 rendered" width="580" /> | <img src="docs/assets/example-3-ctrl-a-editable.jpg" alt="Example 3 Ctrl+A editable" width="580" /> |
+| <img src="docs/assets/example-4-ai-scenarios.jpg" alt="Example 4 rendered" width="580" /> | <img src="docs/assets/example-4-ctrl-a-editable.jpg" alt="Example 4 Ctrl+A editable" width="580" /> |
 
 ### Extracted RGBA transparent component sheet (automatic alpha QA)
 
 <p align="center">
-  <img src="docs/assets/components-alpha-sheet.jpg" alt="SlideForge extracted RGBA transparent 3D components on checkerboard" width="1200" />
-</p>
-
-### Rendered native editable PPTX examples
-
-<p align="center">
-  <img src="docs/assets/example-1-strategy-house.jpg" alt="Example 1: Strategy House editable PPTX" width="1200" />
-</p>
-
-<p align="center">
-  <img src="docs/assets/example-2-okr-ecosystem.jpg" alt="Example 2: OKR Ecosystem editable PPTX" width="1200" />
-</p>
-
-<p align="center">
-  <img src="docs/assets/example-3-ai-overview.jpg" alt="Example 3: Enterprise AI Platform Overview editable PPTX" width="1200" />
-</p>
-
-<p align="center">
-  <img src="docs/assets/example-4-ai-scenarios.jpg" alt="Example 4: Six AI Benchmark Scenarios editable PPTX" width="1200" />
+  <img src="docs/assets/components-alpha-sheet.jpg" alt="SlideForge extracted RGBA transparent 3D components on checkerboard" width="1160" />
 </p>
 
 <a id="features"></a>
