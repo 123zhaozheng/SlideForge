@@ -1,0 +1,18 @@
+{
+  "slides": [
+    {
+      "number": 1,
+      "title": "Executive Overview with Visual Slot",
+      "prompt_file": "blueprint_prompts/slide-01.txt",
+      "image_file": "blueprints/slide-01.png",
+      "slots": [
+        {
+          "id": "hero_photo",
+          "position": "0.58,0.18,0.36,0.62",
+          "source": "",
+          "label": "此处放入产品实景截图 / 现场照片"
+        }
+      ]
+    }
+  ]
+}

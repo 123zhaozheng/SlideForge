@@ -80,12 +80,20 @@ Packing 12+ icons into one image generation call degrades detail and causes over
 
 It also strips isolated outlier specks, generates optional tinted variants (such as `"tint": "white"` for dark hero surfaces), and renders a checkerboard `*_alpha_preview.png` for inspection before PPTX assembly.
 
-### Two production modes
+### Guided onboarding & two production modes
+
+On startup, the Agent safely checks `.env` readiness (`--check-env`), reads your brief and optional background template, clearly explains Mode A vs Mode B so you can choose, and confirms any style references (including rendering an existing reference `.pptx` to PNGs) plus real photo/illustration slots before generating:
 
 | Mode | Input | Flow | Best for |
 | :--- | :--- | :--- | :--- |
-| **Mode A · Direct-Design** | Brief/document + optional background template | Skip full-slide image → plan layout → generate component sheets → assemble PPTX → render QA | Fast everyday decks, architecture slides, KPI reports |
-| **Mode B · Blueprint-Replica** | Existing flat slide image, or brief → full-slide blueprint first | Use full-slide image as `style_ref` → split & extract components → reconstruct 1:1 in native PPTX → render QA | Executive keynotes, editorial layouts, converting flat AI decks into editable PPTX |
+| **Mode A · Direct-Design** | Brief/document + optional background template | Skip full-slide blueprint → plan layout → generate component sheets → assemble PPTX → render QA | Fast everyday decks, architecture slides, KPI reports |
+| **Mode B · Master Blueprint-Replica** | Brief + optional style refs / reference PPTX, or existing flat slide | Generate 1–2 editorial full-slide blueprints first via `generate_blueprint.py` (with template lock & photo slot avoidance) to approve taste → split & extract components → reconstruct 1:1 in native PPTX with image slots → render QA | Executive keynotes, editorial layouts, converting flat AI decks into editable PPTX |
+
+### End-to-end photo & illustration slots (`slots` → `add_image_slot`)
+
+For real photos, product screenshots, certificates, or custom illustrations that should never be hallucinated by an image model:
+- **Blueprint stage**: Declare `slots` in `blueprint_manifest.json`; `generate_blueprint.py` overlays transparent corner-bracket guides so the blueprint leaves clean whitespace and records exact slide-inch coordinates.
+- **Assembly stage**: `pptx_kit.add_image_slot()` places real images with `fit="cover"` center-cropping (zero distortion, zero margins), supersampled `rounded`/`circle` clipping, subtle border/shadow, and optional captions — or renders a sleek native dashed placeholder slot when no image is supplied yet.
 
 ### Real PowerPoint / WPS / LibreOffice render loop
 

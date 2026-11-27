@@ -13,10 +13,11 @@ Eliminates classic python-pptx visual flaws across any brand palette or slide te
 
 from __future__ import annotations
 
+import io
 from pathlib import Path
 from typing import Dict, Optional, Sequence, Tuple, Union
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageOps
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.dml import MSO_LINE_DASH_STYLE
@@ -532,6 +533,184 @@ def add_picture_fit(
     nx = x + (w - nw) / 2.0
     ny = y + (h - nh) / 2.0
     return slide.shapes.add_picture(str(p), Inches(nx), Inches(ny), width=Inches(nw), height=Inches(nh))
+
+
+def _render_slot_image_bytes(
+    img_path: Path,
+    target_ratio: float,
+    fit: str = "cover",
+    shape: str = "rounded",
+    radius_ratio: float = 0.055,
+) -> Tuple[io.BytesIO, Tuple[int, int]]:
+    """Center-crop (cover) and apply optional supersampled rounded/circle alpha mask in memory."""
+    with Image.open(img_path) as raw:
+        im = ImageOps.exif_transpose(raw).convert("RGBA")
+
+    iw, ih = im.size
+    if fit == "cover" and iw > 0 and ih > 0 and target_ratio > 0:
+        src_ratio = iw / ih
+        if src_ratio > target_ratio:
+            new_w = max(1, int(round(ih * target_ratio)))
+            left = (iw - new_w) // 2
+            im = im.crop((left, 0, left + new_w, ih))
+        elif src_ratio < target_ratio:
+            new_h = max(1, int(round(iw / target_ratio)))
+            top = (ih - new_h) // 2
+            im = im.crop((0, top, iw, top + new_h))
+
+    cw, ch = im.size
+    if shape == "circle":
+        side = min(cw, ch)
+        left = (cw - side) // 2
+        top = (ch - side) // 2
+        im = im.crop((left, top, left + side, top + side))
+        cw = ch = side
+        ss = 2
+        mask = Image.new("L", (cw * ss, ch * ss), 0)
+        ImageDraw.Draw(mask).ellipse((0, 0, cw * ss - 1, ch * ss - 1), fill=255)
+        mask = mask.resize((cw, ch), Image.Resampling.LANCZOS)
+        r, g, b, a = im.split()
+        im.putalpha(Image.composite(a, Image.new("L", (cw, ch), 0), mask))
+    elif shape == "rounded":
+        radius = max(4, int(round(min(cw, ch) * radius_ratio)))
+        ss = 2
+        mask = Image.new("L", (cw * ss, ch * ss), 0)
+        ImageDraw.Draw(mask).rounded_rectangle(
+            (0, 0, cw * ss - 1, ch * ss - 1),
+            radius=radius * ss,
+            fill=255,
+        )
+        mask = mask.resize((cw, ch), Image.Resampling.LANCZOS)
+        r, g, b, a = im.split()
+        im.putalpha(Image.composite(a, Image.new("L", (cw, ch), 0), mask))
+
+    buf = io.BytesIO()
+    im.save(buf, format="PNG")
+    buf.seek(0)
+    return buf, (cw, ch)
+
+
+def add_image_slot(
+    slide,
+    x: float,
+    y: float,
+    w: float,
+    h: float,
+    img_path: Optional[Union[str, Path]] = None,
+    fit: str = "cover",
+    shape: str = "rounded",
+    radius_ratio: float = 0.055,
+    border_color: Optional[RGBColor] = PALETTE_DEFAULT["line"],
+    border_pt: float = 0.75,
+    shadow: bool = True,
+    caption: str = "",
+    placeholder_label: str = "图片 / 插图槽位（可在 PowerPoint 中替换为真实图片）",
+    placeholder_fill: RGBColor = RGBColor(0xF6, 0xF8, 0xFA),
+    placeholder_border: RGBColor = PALETTE_DEFAULT["dash"],
+):
+    """Place a real photo/illustration into a clean visual slot, or render a native dashed placeholder slot.
+
+    - Filled mode (img_path provided): supports `fit="cover"` (smart center crop, zero distortion)
+      or `fit="contain"`, with `shape="rect" | "rounded" | "circle"`, subtle frame/shadow, and optional caption.
+    - Placeholder mode (img_path is None): draws a crisp native editable dashed slot box with centered guidance
+      text so users can drop in their own screenshot/photo later in PowerPoint without breaking layout.
+    """
+    cap_h = 0.28 if caption else 0.0
+    img_h = max(0.3, h - cap_h)
+
+    if img_path is not None and str(img_path).strip():
+        p = Path(img_path)
+        if not p.is_file():
+            raise FileNotFoundError(f"Image slot file not found: {p}")
+
+        target_ratio = (w / img_h) if img_h > 0 else 1.0
+        buf, (cw, ch) = _render_slot_image_bytes(
+            p,
+            target_ratio=target_ratio,
+            fit=fit,
+            shape=shape,
+            radius_ratio=radius_ratio,
+        )
+
+        if shape == "circle":
+            side = min(w, img_h)
+            px = x + (w - side) / 2.0
+            py = y + (img_h - side) / 2.0
+            pw = ph = side
+        elif fit == "contain" and cw > 0 and ch > 0:
+            scale = min(w / cw, img_h / ch)
+            pw, ph = cw * scale, ch * scale
+            px = x + (w - pw) / 2.0
+            py = y + (img_h - ph) / 2.0
+        else:
+            px, py, pw, ph = x, y, w, img_h
+
+        frame_shape = None
+        if border_color is not None or shadow:
+            if shape == "circle":
+                frame_shape = slide.shapes.add_shape(MSO_SHAPE.OVAL, Inches(px), Inches(py), Inches(pw), Inches(ph))
+            elif shape == "rounded":
+                frame_shape = slide.shapes.add_shape(
+                    MSO_SHAPE.ROUNDED_RECTANGLE, Inches(px), Inches(py), Inches(pw), Inches(ph)
+                )
+                if frame_shape.adjustments:
+                    frame_shape.adjustments[0] = radius_ratio
+            else:
+                frame_shape = slide.shapes.add_shape(
+                    MSO_SHAPE.RECTANGLE, Inches(px), Inches(py), Inches(pw), Inches(ph)
+                )
+            frame_shape.fill.solid()
+            frame_shape.fill.fore_color.rgb = PALETTE_DEFAULT["white"]
+            if border_color is not None:
+                frame_shape.line.color.rgb = border_color
+                frame_shape.line.width = Pt(border_pt)
+            else:
+                frame_shape.line.fill.background()
+            if shadow:
+                set_soft_shadow(frame_shape, blur_pt=10, dist_pt=3, alpha_pct=8)
+            else:
+                clear_shadow(frame_shape)
+
+        pic = slide.shapes.add_picture(buf, Inches(px), Inches(py), width=Inches(pw), height=Inches(ph))
+        primary_obj = pic
+    else:
+        mso = MSO_SHAPE.OVAL if shape == "circle" else (
+            MSO_SHAPE.ROUNDED_RECTANGLE if shape == "rounded" else MSO_SHAPE.RECTANGLE
+        )
+        box = slide.shapes.add_shape(mso, Inches(x), Inches(y), Inches(w), Inches(img_h))
+        if shape == "rounded" and box.adjustments:
+            box.adjustments[0] = radius_ratio
+        box.fill.solid()
+        box.fill.fore_color.rgb = placeholder_fill
+        box.line.color.rgb = placeholder_border
+        box.line.width = Pt(1.25)
+        box.line.dash_style = MSO_LINE_DASH_STYLE.DASH
+        clear_shadow(box)
+        tf = box.text_frame
+        tf.word_wrap = True
+        tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+        tf.margin_left = tf.margin_right = Inches(0.25)
+        tf.margin_top = tf.margin_bottom = Inches(0.15)
+        p0 = tf.paragraphs[0]
+        p0.alignment = PP_ALIGN.CENTER
+        r0 = p0.add_run()
+        r0.text = placeholder_label
+        set_run_font(r0, size=11, color=PALETTE_DEFAULT["muted"], bold=False)
+        primary_obj = box
+
+    if caption:
+        add_text(
+            slide,
+            x,
+            y + img_h + 0.04,
+            w,
+            0.24,
+            caption,
+            size=9.5,
+            color=PALETTE_DEFAULT["muted"],
+            align=PP_ALIGN.CENTER,
+        )
+    return primary_obj
 
 
 def _set_cell_borders(cell, bottom_hex: str = "E6E9EF", bottom_pt: float = 0.75) -> None:
